@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TypeKitLoaderComponent } from './type-kit-loader.component';
+import { TypekitLoaderComponent } from './type-kit-loader.component';
 
 describe('TypeKitLoaderComponent', () => {
-  let component: TypeKitLoaderComponent;
-  let fixture: ComponentFixture<TypeKitLoaderComponent>;
+  let component: TypekitLoaderComponent;
+  let fixture: ComponentFixture<TypekitLoaderComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TypeKitLoaderComponent]
+      imports: [TypekitLoaderComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TypeKitLoaderComponent);
+    fixture = TestBed.createComponent(TypekitLoaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
