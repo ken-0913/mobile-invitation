@@ -1,0 +1,47 @@
+.input-wrapper {
+  display: flex;            /* Flexbox 레이아웃 설정 */
+  justify-content: center;  /* 가로 방향으로 중앙 정렬 */
+  align-items: center;      /* 세로 방향으로 중앙 정렬 */
+}
+
+.container-item {
+  width: 320px;             /* 자식 div의 너비 */
+  height: 45px;             /* 자식 div의 높이 */
+  border: 1px solid black;  /* 테두리 설정 */
+  border-radius: 5px;       /* 테두리 둥글게 설정 */
+  background-color: white;  /* 배경색 설정 */
+  display: flex;            /* Flexbox를 사용하여 자식 요소 세로 중앙 정렬 */
+  align-items: center;      /* 세로 중앙 정렬 */
+  text-align: left;         /* 텍스트를 왼쪽 정렬 */
+  padding-left: 10px;       /* 왼쪽 여백 추가 (텍스트가 너무 모이지 않도록) */
+}
+
+.custom-input {
+  width: 300px;
+  height: 30px;
+}
+
+.copy-btn {
+  position: absolute;
+  right: -70px; /* 아이콘을 오른쪽에 배치 */
+  top: 50%;
+  transform: translateX(-150%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.copy-btn .fas {
+  font-size: 18px; /* 아이콘 크기 */
+  color: #aaa;
+  transition: color 0.3s ease;
+}
+
+.copy-btn:hover .fas {
+  color: #888; /* 마우스 오버 시 색상 변화 */
+}
+
+.text-account {
+  height: 75px;
+  text-align: center;
+}

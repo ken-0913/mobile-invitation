@@ -1,0 +1,66 @@
+// src/styles.scss
+
+/* 기본 스타일 (데스크탑 또는 큰 화면을 위한 기본 스타일) */
+//body {
+//  font-family: Arial, sans-serif;
+//  display: grid;
+//  margin: 0;
+//  padding: 0;
+//  background-color: #fff;
+//}
+
+/* 큰 화면에서의 컨테이너 스타일 */
+.container {
+  width: 480px;
+  margin: 0 auto;
+}
+
+/* 스마트폰 화면에 맞게 스타일을 변경하기 위한 미디어 쿼리 */
+@media (max-width: 768px) {
+  /* 화면 크기가 768px 이하일 때, 즉, 태블릿 및 모바일에서 적용될 스타일 */
+
+  .container {
+    width: 100%;
+  }
+
+  /* 모바일 화면에서 글자 크기 조정 */
+  body {
+    font-size: 14px;
+  }
+
+  /* 버튼 스타일 예시 */
+  .btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  /* 이미지 크기 조정 */
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  /* 화면 크기가 480px 이하일 때, 즉, 작은 스마트폰 화면에서 적용될 스타일 */
+
+  .container {
+    width: 100%;
+
+  }
+
+  body {
+    font-size: 12px; /* 더 작은 화면에서 글자 크기 조정 */
+  }
+
+  .btn {
+    padding: 12px;
+    font-size: 14px;
+  }
+}
+
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif; }

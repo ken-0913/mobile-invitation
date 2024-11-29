@@ -1,0 +1,34 @@
+.map_container {
+  text-align: center;
+  .transportation {
+    width: 400px;
+
+  }
+}
+
+
+.map {
+  margin: auto;
+  width: 500px;
+  height: 400px;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: 20% 70%; /* 첫 번째 열(셀 1, 셀 3)은 20%, 두 번째 열(셀 2, 셀 4)은 80% */
+  grid-template-rows: repeat(2, 1fr);    /* 2개의 행을 1:1 비율로 설정 */
+  gap: 10px; /* 그리드 항목 사이의 간격 */
+}
+.grid-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+
+.grid-item.content {
+  justify-content: flex-start;
+  padding-left: 10px;
+}
+.grid-item, p {
+  font-family: "aor_kr", Graphie,rixmmjse-pro;
+}

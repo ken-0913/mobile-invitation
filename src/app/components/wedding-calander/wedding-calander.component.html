@@ -1,0 +1,34 @@
+<div class="calendar">
+  <div class="calendar-box">
+    <p>DATE</p>
+    <br>
+    <br>
+    <br>
+    <table class="calendar-table">
+      <thead>
+      <tr>
+        <th *ngFor="let day of ['일', '월', '화', '수', '목', '금', '토']">{{ day }}</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let row of createRows()">
+        <td
+          *ngFor="let day of row"
+          [ngClass]="{'selected' : day === currentDate.getDate()}"
+        >
+          <span *ngIf="day">{{ day }}</span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="calendar-header">
+          <p>
+            {{ currentYear }}년
+            {{ monthNames[currentMonth] }}
+            {{currentDate.getDate()}}일
+            {{ anteMeridiem }}
+            {{weddingStartTime}}
+          </p>
+    </div>
+  </div>
+</div>
