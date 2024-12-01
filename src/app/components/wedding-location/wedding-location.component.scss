@@ -2,14 +2,13 @@
   text-align: center;
   .transportation {
     width: 400px;
-
   }
 }
 
 
 .map {
   margin: auto;
-  width: 500px;
+  width: 100%;
   height: 400px;
 }
 .grid-container {
@@ -31,4 +30,11 @@
 }
 .grid-item, p {
   font-family: "aor_kr", Graphie,rixmmjse-pro;
+}
+
+.content {
+  text-align: left; /* 왼쪽 정렬 */
+  word-break: break-word; /* 긴 단어가 있을 경우 줄바꿈 */
+  line-height: 2; /* 행 간격을 넓게 설정 */
+  padding-left: 10px; /* 텍스트와 강한 항목 사이 여백 */
 }

@@ -10,11 +10,12 @@ import {KakaoShareComponent} from './components/kakao-share/kakao-share.componen
 import {WeddingFoorterComponent} from './components/wedding-foorter/wedding-foorter.component';
 import {WeddingInviteCommentComponent} from './components/wedding-invite-comment/wedding-invite-comment.component';
 import {TypekitLoaderComponent} from './components/type-kit-loader/type-kit-loader.component';
+import {WeddingGalleryV2Component} from './components/wedding-gallery-v2/wedding-gallery-v2.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FirstMainComponent, MatGridList, MatGridTile, WeddingCalanderComponent, WeddingLocationComponent, WeddingGalleryComponent, WeddingAccountComponent, KakaoShareComponent, WeddingFoorterComponent, WeddingInviteCommentComponent, TypekitLoaderComponent],
+  imports: [RouterOutlet, FirstMainComponent, MatGridList, MatGridTile, WeddingCalanderComponent, WeddingLocationComponent, WeddingGalleryComponent, WeddingAccountComponent, KakaoShareComponent, WeddingFoorterComponent, WeddingInviteCommentComponent, TypekitLoaderComponent, WeddingGalleryV2Component],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

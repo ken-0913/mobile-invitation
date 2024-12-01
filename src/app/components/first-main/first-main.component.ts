@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatGridList, MatGridTile } from '@angular/material/grid-list';
+import {NgOptimizedImage} from '@angular/common';
 
 @Component({
   selector: 'app-first-main',
@@ -7,6 +8,7 @@ import { MatGridList, MatGridTile } from '@angular/material/grid-list';
   imports: [
     MatGridList,
     MatGridTile,
+    NgOptimizedImage,
   ],
   templateUrl: './first-main.component.html',
   styleUrl: './first-main.component.scss'

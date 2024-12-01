@@ -1,5 +1,5 @@
 <div class="map_container">
-  <br><br>
+  <br><br><br>
   <p>LOCATION</p>
   <br><br>
   <p>
@@ -7,7 +7,7 @@
     {{ monthNames }}월
     {{ currentDate }}일
     {{ days }}요일
-    {{ anteMeridiem }} 오전
+    {{ anteMeridiem }}
     {{weddingStartHourTime}}시
     {{weddingStartMinuteTime}}분
   </p>
@@ -15,11 +15,11 @@
 <div #map class="map"></div>
   <br><br>
   <div class="grid-container">
-    <div class="grid-item">버&nbsp;&nbsp;&nbsp;&nbsp;스</div>
+    <strong class="grid-item">버&nbsp;&nbsp;&nbsp;&nbsp;스</strong>
     <div class="grid-item content">{{address}}</div>
-    <div class="grid-item">지하철</div>
+    <strong class="grid-item">지하철</strong>
     <div class="grid-item content">{{subway}}</div>
-    <div class="grid-item">주&nbsp;&nbsp;&nbsp;&nbsp;차</div>
+    <strong class="grid-item">주&nbsp;&nbsp;&nbsp;&nbsp;차</strong>
     <div class="grid-item content">{{parking}}</div>
   </div>
 </div>
