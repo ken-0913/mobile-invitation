@@ -1,18 +1,40 @@
 <div class="wedding-invite-comment">
   <div class="wedding-invite-comment-box">
-    <p>YOU'RE INVITED</p>
+    <p class="invite-title">YOU'RE INVITED</p>
+    <br>
     <p>"인생은 누구나 비슷한 길을 걸어간단다.</p>
     <p>결국엔 늙어서 지난 날을 추억하는 것일 뿐이야.</p>
     <p>그러니 결혼은 따뜻한 사람과 하거라"</p>
     <br>
     <p>평생 서로에게 따뜻함이 될 것을 약속하는 자리에</p>
     <p>늘 곁에서 아껴 주신 고마운 분들을 모십니다. </p>
-    <br>
-    <br>
-    <div class="names">
-      <p class="name-row"><span>{{brideFather}}・{{brideMother}}</span>의 아들 <span>{{brideName}}</span></p>
-      <p class="name-row"><span>{{groomFather}}・{{groomMother}}</span>의 딸 <span>{{groomName}}</span></p>
-    </div>
+    <br><br><br><br>
+
+    <table class="invisible-table">
+      <tr>
+        <td>{{brideFather}}·{{brideMother}}</td>
+        <td>의</td>
+        <td>아들</td>
+        <td>{{brideName}}</td>
+      </tr>
+      <tr>
+        <td>{{groomFather}}·{{groomMother}}</td>
+        <td>의</td>
+        <td>딸</td>
+        <td>{{groomName}}</td>
+      </tr>
+    </table>
+    <br><br><br><br>
+    <p>
+      {{ currentYear }}년
+      {{ monthNames }}월
+      {{ currentDate }}일
+      {{ days }}요일
+      {{ anteMeridiem }}
+      {{weddingStartHourTime}}시
+      {{weddingStartMinuteTime}}분
+    </p>
+    <p>{{ weddingHallName }} </p>
   </div>
 </div>
 

@@ -1,0 +1,27 @@
+<div class="carousel-container">
+  <p class="carousel-title">GALLERY</p>
+  <p class="carousel-subtitle">옆으로 넘겨서 보세요</p>
+  <div
+    class="carousel"
+    (mousedown)="onSwipeStart($event)"
+    (mousemove)="onSwipeMove($event)"
+    (mouseup)="onSwipeEnd()"
+    (mouseleave)="onSwipeEnd()"
+    (touchstart)="onSwipeStart($event)"
+    (touchmove)="onSwipeMove($event)"
+    (touchend)="onSwipeEnd()"
+  >
+    <div
+      class="carousel-track"
+      [style.transform]="'translateX(' + currentTranslate + '%)'"
+      [style.transition]="isDragging ? 'none' : 'transform 0.5s ease-in-out'"
+    >
+      <div class="carousel-slide" *ngFor="let image of images">
+        <img [src]="image" alt="Slide Image" />
+      </div>
+    </div>
+  </div>
+  <p class="carousel-indicator">
+    {{ currentIndex + 1 }} / {{ images.length }}
+  </p>
+</div>
