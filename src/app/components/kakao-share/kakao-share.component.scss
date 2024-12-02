@@ -40,13 +40,23 @@
   background-size: 60%;
 }
 
-.url-icon {
-  background-color: #fff; /* 흰 배경 */
-  border: 1px solid #000; /* 테두리 */
-  background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Font_Awesome_5_solid_share-alt.svg/512px-Font_Awesome_5_solid_share-alt.svg.png'); /* URL 공유 아이콘 */
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 60%;
+//.share-alt-icon {
+//  background-color: transparent; /* 흰 배경 */
+//  border: 1px solid transparent; /* 테두리 */
+//  background-repeat: no-repeat;
+//  background-position: center;
+//  background-size: 60%;
+//}
+
+.share-alt-icon {
+  font-size: 2rem; /* 아이콘 크기를 키움 */
+  background-color: transparent; /* 배경색 투명 */
+  border: 1px solid transparent; /* 테두리 제거 */
+  cursor: pointer; /* 커서 변경 */
+  padding: 10px; /* 내부 여백 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* 텍스트 스타일 */
