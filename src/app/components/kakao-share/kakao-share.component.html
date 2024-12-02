@@ -1,5 +1,17 @@
-<div class="share-button" (click)="share()">
-  <img src="kakaoshare.png" height="50px" width="50px" alt=""/>
+<br /><br /><br /><br /><br /><br />
+<div class="icon-container">
+  <div class="icon-item">
+    <div class="icon kakao-icon" (click)="share()"></div>
+    <p class="icon-text">
+      카카오톡<br />
+      공유하기
+    </p>
+  </div>
+  <div class="icon-item">
+    <button class="icon url-icon" (click)="copyToClipboard()"></button>
+    <p class="icon-text">
+      URL<br />
+      복사하기
+    </p>
+  </div>
 </div>
-<button (click)="copyToClipboard()">현재 URL 복사하기</button>
-<div> 카카오톡 공유하기</div>

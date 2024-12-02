@@ -16,6 +16,7 @@
   grid-template-columns: 20% 70%; /* 첫 번째 열(셀 1, 셀 3)은 20%, 두 번째 열(셀 2, 셀 4)은 80% */
   grid-template-rows: repeat(2, 1fr);    /* 2개의 행을 1:1 비율로 설정 */
   gap: 10px; /* 그리드 항목 사이의 간격 */
+  font-size: 16px;
 }
 .grid-item {
   display: flex;
@@ -37,4 +38,8 @@
   word-break: break-word; /* 긴 단어가 있을 경우 줄바꿈 */
   line-height: 2; /* 행 간격을 넓게 설정 */
   padding-left: 10px; /* 텍스트와 강한 항목 사이 여백 */
+}
+
+.location-title {
+  font-size: 1.25rem;
 }

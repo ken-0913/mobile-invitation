@@ -5,18 +5,20 @@
 <div class="input-wrapper">
   <div class="container-item">
   신랑측 계좌번호
-<!--  <button class="copy-btn" (click)="copyToClipboard()">-->
-<!--    <i class="fas fa-copy"></i> &lt;!&ndash; Font Awesome 복사 아이콘 &ndash;&gt;-->
-<!--  </button>-->
+      <button class="fas fa-copy copy-icon"
+              [cdkCopyToClipboard]="brideAccount"
+              (click)="showCopiedAlert()"
+      ></button>
   </div>
 </div>
 <div style="height: 25px"> </div>
 <div class="input-wrapper">
   <div class="container-item">
     신부측 계좌번호
-    <!--  <button class="copy-btn" (click)="copyToClipboard()">-->
-    <!--    <i class="fas fa-copy"></i> &lt;!&ndash; Font Awesome 복사 아이콘 &ndash;&gt;-->
-    <!--  </button>-->
+    <button class="fas fa-copy copy-icon"
+            [cdkCopyToClipboard]="groomAccount"
+            (click)="showCopiedAlert()"
+    ></button>
   </div>
 </div>
 
