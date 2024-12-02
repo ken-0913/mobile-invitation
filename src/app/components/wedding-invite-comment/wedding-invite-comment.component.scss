@@ -58,6 +58,20 @@
   gap: 10px; /* 행 간격 조절 */
 }
 
-p {
+p,td,tr {
   font-family: "aor_kr", Graphie,rixmmjse-pro;
 }
+
+td,tr {
+  font-size: 1rem; /* 점 크기를 키우기 위해 폰트 크기 조정 */
+  line-height: normal; /* 줄간격을 기본값으로 유지 */
+}
+
+.dot {
+  font-size: 3rem; /* 점의 크기만 키움 */
+  line-height: 1; /* 줄 간격 변경 방지 */
+  vertical-align: middle; /* 점의 세로 위치를 중앙으로 조정 */
+}
+
+
+

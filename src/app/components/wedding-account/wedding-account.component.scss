@@ -21,32 +21,42 @@
   height: 30px;
 }
 
-.copy-btn {
-  position: absolute;
-  right: -70px; /* 아이콘을 오른쪽에 배치 */
-  top: 50%;
-  transform: translateX(-150%);
-  background: transparent;
-  border: none;
-  cursor: pointer;
-}
-
-.copy-btn .fas {
-  font-size: 18px; /* 아이콘 크기 */
-  color: #aaa;
-  transition: color 0.3s ease;
-}
-
-.copy-btn:hover .fas {
-  color: #888; /* 마우스 오버 시 색상 변화 */
-}
-
 .text-account {
   height: 75px;
+  font-size: 20px;
   text-align: center;
 }
 
 p, strong {
   font-family: "aor_kr", Graphie,rixmmjse-pro;
 }
+
+.container-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* 좌우 정렬 */
+  width: 80%;
+  padding: 10px 15px;
+  border: 1px solid #aaa3a3;
+  border-radius: 10px;
+  font-size: 12px;
+  background: #fff;
+  box-sizing: border-box;
+  letter-spacing: 5px;
+}
+
+.copy-icon {
+  background: none; /* 배경색 투명 */
+  border: none;
+  font-size: 1.2rem; /* 아이콘 크기 */
+  cursor: pointer;
+  color: #ccc; /* 연한 회색 */
+  margin-left: auto; /* 오른쪽 정렬 */
+}
+
+
+p, strong, .container-item{
+  font-family: "aor_kr", Graphie,rixmmjse-pro;
+}
+
 
