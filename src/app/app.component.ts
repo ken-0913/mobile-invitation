@@ -7,7 +7,7 @@ import {WeddingLocationComponent} from './components/wedding-location/wedding-lo
 import {WeddingGalleryComponent} from './components/wedding-gallery/wedding-gallery.component';
 import {WeddingAccountComponent} from './components/wedding-account/wedding-account.component';
 import {KakaoShareComponent} from './components/kakao-share/kakao-share.component';
-import {WeddingFoorterComponent} from './components/wedding-foorter/wedding-foorter.component';
+import {WeddingFoorterComponent} from './components/wedding-footer/wedding-foorter.component';
 import {WeddingInviteCommentComponent} from './components/wedding-invite-comment/wedding-invite-comment.component';
 import {TypekitLoaderComponent} from './components/type-kit-loader/type-kit-loader.component';
 import {WeddingGalleryV2Component} from './components/wedding-gallery-v2/wedding-gallery-v2.component';
@@ -15,7 +15,21 @@ import {WeddingGalleryV2Component} from './components/wedding-gallery-v2/wedding
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FirstMainComponent, MatGridList, MatGridTile, WeddingCalanderComponent, WeddingLocationComponent, WeddingGalleryComponent, WeddingAccountComponent, KakaoShareComponent, WeddingFoorterComponent, WeddingInviteCommentComponent, TypekitLoaderComponent, WeddingGalleryV2Component],
+  imports: [
+    RouterOutlet,
+    FirstMainComponent,
+    MatGridList,
+    MatGridTile,
+    WeddingCalanderComponent,
+    WeddingLocationComponent,
+    WeddingGalleryComponent,
+    WeddingAccountComponent,
+    KakaoShareComponent,
+    WeddingFoorterComponent,
+    WeddingInviteCommentComponent,
+    TypekitLoaderComponent,
+    WeddingGalleryV2Component
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
