@@ -2,27 +2,27 @@
 <div class="text-account">
   <strong>마음 전하실 곳</strong>
 </div>
-<div class="input-wrapper">
-  <div class="container-item">
-  신랑측 계좌번호
+
+@for (acc of invitation.accounts.groom; track acc.number) {
+  <div class="input-wrapper">
+    <div class="container-item">
+      <span>신랑측 · {{ acc.bank }} {{ acc.number }} ({{ acc.holder }})</span>
       <button class="fas fa-copy copy-icon"
-              [cdkCopyToClipboard]="brideAccount"
-              (click)="showCopiedAlert()"
-      ></button>
+              [cdkCopyToClipboard]="acc.number"
+              (click)="showCopiedAlert()"></button>
+    </div>
   </div>
-</div>
-<div style="height: 25px"> </div>
-<div class="input-wrapper">
-  <div class="container-item">
-    신부측 계좌번호
-    <button class="fas fa-copy copy-icon"
-            [cdkCopyToClipboard]="groomAccount"
-            (click)="showCopiedAlert()"
-    ></button>
+  <div style="height: 25px"></div>
+}
+
+@for (acc of invitation.accounts.bride; track acc.number) {
+  <div class="input-wrapper">
+    <div class="container-item">
+      <span>신부측 · {{ acc.bank }} {{ acc.number }} ({{ acc.holder }})</span>
+      <button class="fas fa-copy copy-icon"
+              [cdkCopyToClipboard]="acc.number"
+              (click)="showCopiedAlert()"></button>
+    </div>
   </div>
-</div>
-
-
-
-
-
+  <div style="height: 25px"></div>
+}

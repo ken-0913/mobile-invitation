@@ -1,25 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Invitation } from '../../models/invitation.model';
+import { koreanDateTimeFull } from '../../utils/date-format';
 
 @Component({
   selector: 'app-wedding-invite-comment',
-  standalone: true,
   imports: [],
   templateUrl: './wedding-invite-comment.component.html',
-  styleUrl: './wedding-invite-comment.component.scss'
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrl: './wedding-invite-comment.component.scss',
 })
 export class WeddingInviteCommentComponent {
-  brideFather= '김정용'
-  brideMother= '전계선'
-  groomFather= '김정용'
-  groomMother= '전계선'
-  brideName='우준'
-  groomName='아영';
-  currentYear=2024;
-  monthNames=4;
-  currentDate=11;
-  days='일';
-  anteMeridiem='오전';
-  weddingStartHourTime=11;
-  weddingStartMinuteTime=30;
-  weddingHallName = '아모리스 역삼 1층 단독홀'
+  @Input({ required: true }) invitation!: Invitation;
+
+  get dateLine(): string {
+    return koreanDateTimeFull(this.invitation.wedding.dateTime);
+  }
+
+  get hallText(): string {
+    const v = this.invitation.wedding.venue;
+    return v.hall ? `${v.name} ${v.hall}` : v.name;
+  }
 }

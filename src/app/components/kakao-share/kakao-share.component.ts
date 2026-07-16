@@ -1,80 +1,77 @@
-import {Component, OnInit} from '@angular/core';
+import {
+  Component,
+  Inject,
+  Input,
+  OnInit,
+  PLATFORM_ID,
+  ChangeDetectionStrategy,
+} from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Invitation } from '../../models/invitation.model';
+
 declare global {
   interface Window {
     Kakao: any;
   }
 }
 
-
 @Component({
   selector: 'app-kakao-share',
-  standalone: true,
-  imports: [
-  ],
+  imports: [],
   templateUrl: './kakao-share.component.html',
-  styleUrl: './kakao-share.component.scss'
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrl: './kakao-share.component.scss',
 })
-export class KakaoShareComponent implements OnInit{
+export class KakaoShareComponent implements OnInit {
+  @Input({ required: true }) invitation!: Invitation;
 
   private readonly JAVASCRIPT_KEY = '9b0205af17263ee2eba7167d5cb76a8e';
-  constructor() {
-    this.initializeKakao();
-  }
 
-  ngOnInit(): void {}
-  private initializeKakao(): void {
-    if (!window.Kakao.isInitialized()) {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+
+  ngOnInit(): void {
+    // Kakao SDK 는 브라우저에서만 초기화 (SSR 서버엔 window 없음)
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+    if (window.Kakao && !window.Kakao.isInitialized()) {
       window.Kakao.init(this.JAVASCRIPT_KEY);
     }
   }
-  copyToClipboard(): void {
-    // 현재 페이지 URL을 가져옵니다.
-    const currentUrl = window.location.href;
 
-    // 클립보드 API 사용
-    navigator.clipboard.writeText(currentUrl).then(() => {
-      alert('URL이 복사되었습니다!');
-    }).catch(err => {
-      console.error('URL 복사 실패:', err);
-      alert('URL 복사 실패');
-    });
+  copyToClipboard(): void {
+    const currentUrl = window.location.href;
+    navigator.clipboard
+      .writeText(currentUrl)
+      .then(() => alert('URL이 복사되었습니다!'))
+      .catch((err) => {
+        console.error('URL 복사 실패:', err);
+        alert('URL 복사 실패');
+      });
   }
+
   share(): void {
-    this.shareMessage({
-      title: '공유할 제목',
-      description: '공유할 설명',
-      imageUrl: '공유할 이미지 URL',
-      link: '공유할 링크'
-    });
-  }
-  shareMessage(options: {
-    title: string;
-    description: string;
-    imageUrl?: string;
-    link: string;
-  }): void {
+    if (!isPlatformBrowser(this.platformId) || !window.Kakao) {
+      return;
+    }
+    const link = window.location.href;
+    const share = this.invitation.share;
+    const image = share.imageUrl ?? this.invitation.gallery.coverImage;
+
     window.Kakao.Share.sendDefault({
       objectType: 'feed',
       content: {
-        title: options.title,
-        description: options.description,
-        imageUrl: options.imageUrl,
-        link: {
-          mobileWebUrl: options.link,
-          webUrl: options.link
-        }
+        title: share.title,
+        description: share.description,
+        imageUrl: image,
+        link: { mobileWebUrl: link, webUrl: link },
       },
       buttons: [
         {
-          title: '웹으로 보기',
-          link: {
-            mobileWebUrl: options.link,
-            webUrl: options.link
-          }
-        }
-      ]
+          title: '청첩장 보기',
+          link: { mobileWebUrl: link, webUrl: link },
+        },
+      ],
     });
   }
-
-
 }

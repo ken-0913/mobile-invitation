@@ -1,24 +1,39 @@
-import { Component } from '@angular/core';
-import { MatGridList, MatGridTile } from '@angular/material/grid-list';
-import {NgOptimizedImage} from '@angular/common';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Invitation } from '../../models/invitation.model';
+import { englishDate, englishTime } from '../../utils/date-format';
 
 @Component({
   selector: 'app-first-main',
-  standalone: true,
-  imports: [
-    MatGridList,
-    MatGridTile,
-    NgOptimizedImage,
-  ],
+  imports: [],
   templateUrl: './first-main.component.html',
-  styleUrl: './first-main.component.scss'
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrl: './first-main.component.scss',
 })
 export class FirstMainComponent {
-  title = "YOU'RE INVITED TO THE WEDDING OF";
-  brideName = 'WOOJUN';
-  groomName = 'AYOUNG';
-  date ='SATURDAY, MARCH 9TH, 2024';
-  time = 'AT 11:30 IN THE MORNING';
-  address = 'SINGLEHALL, AMORIS YEOKSAM'
+  @Input({ required: true }) invitation!: Invitation;
 
+  get coverTitle(): string {
+    return this.invitation.content.coverTitle;
+  }
+
+  get namesEn(): string {
+    return `${this.invitation.groom.nameEn} & ${this.invitation.bride.nameEn}`;
+  }
+
+  get dateText(): string {
+    return englishDate(this.invitation.wedding.dateTime);
+  }
+
+  get timeText(): string {
+    return englishTime(this.invitation.wedding.dateTime);
+  }
+
+  get venueText(): string {
+    const v = this.invitation.wedding.venue;
+    return v.hall ? `${v.name} ${v.hall}` : v.name;
+  }
+
+  get coverImage(): string {
+    return this.invitation.gallery.coverImage;
+  }
 }

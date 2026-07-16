@@ -2,57 +2,37 @@
   <div class="wedding-invite-comment-box">
     <p class="invite-title">YOU'RE INVITED</p>
     <br>
-    <p>"인생은 누구나 비슷한 길을 걸어간단다.</p>
-    <p>결국엔 늙어서 지난 날을 추억하는 것일 뿐이야.</p>
-    <p>그러니 결혼은 따뜻한 사람과 하거라"</p>
-    <br>
-    <p>평생 서로에게 따뜻함이 될 것을 약속하는 자리에</p>
-    <p>늘 곁에서 아껴 주신 고마운 분들을 모십니다. </p>
+    <p style="white-space: pre-line">{{ invitation.content.greeting }}</p>
     <br><br><br><br>
 
     <table class="invisible-table">
       <tr>
         <td>
-          <strong>{{brideFather}}</strong>
-          &nbsp;
-          <strong class="dot">
-            ·
-          </strong>
-          &nbsp;
-          <strong>{{brideMother}}</strong></td>
+          <strong>{{ invitation.groom.father }}</strong>
+          &nbsp;<strong class="dot">·</strong>&nbsp;
+          <strong>{{ invitation.groom.mother }}</strong>
+        </td>
         <td>의</td>
-        <td>아들</td>
-        <td>{{brideName}}</td>
+        <td>{{ invitation.groom.order }}</td>
+        <td>{{ invitation.groom.name }}</td>
       </tr>
       <tr>
         <td>
-          <strong>{{groomFather}}</strong>
-          &nbsp;
-          <strong class="dot">
-            ·
-          </strong>
-          &nbsp;
-          <strong>{{groomMother}}</strong></td>
+          <strong>{{ invitation.bride.father }}</strong>
+          &nbsp;<strong class="dot">·</strong>&nbsp;
+          <strong>{{ invitation.bride.mother }}</strong>
+        </td>
         <td>의</td>
-        <td>딸</td>
-        <td>{{groomName}}</td>
+        <td>{{ invitation.bride.order }}</td>
+        <td>{{ invitation.bride.name }}</td>
       </tr>
     </table>
     <br><br><br><br>
-    <p>
-      {{ currentYear }}년
-      {{ monthNames }}월
-      {{ currentDate }}일
-      {{ days }}요일
-      {{ anteMeridiem }}
-      {{weddingStartHourTime}}시
-      {{weddingStartMinuteTime}}분
-    </p>
-    <p>{{ weddingHallName }} </p>
+    <p>{{ dateLine }}</p>
+    <p>{{ hallText }}</p>
   </div>
 </div>
 
 <br>
 <br>
 <br>
-

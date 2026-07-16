@@ -1,16 +1,24 @@
-import {Component, OnInit, Renderer2} from '@angular/core';
+import {Component, OnInit, Renderer2, Inject, PLATFORM_ID, ChangeDetectionStrategy} from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
-  selector: 'app-type-kit-loader',
-  standalone: true,
-  imports: [],
-  templateUrl: './type-kit-loader.component.html',
-  styleUrl: './type-kit-loader.component.scss'
+    selector: 'app-type-kit-loader',
+    imports: [],
+    templateUrl: './type-kit-loader.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
+    styleUrl: './type-kit-loader.component.scss'
 })
 export class TypekitLoaderComponent implements OnInit {
-  constructor(private renderer: Renderer2) {}
+  constructor(
+    private renderer: Renderer2,
+    @Inject(PLATFORM_ID) private platformId: Object,
+  ) {}
 
   ngOnInit(): void {
+    // 폰트 로더는 브라우저에서만 (SSR 서버엔 document 없음)
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
     this.loadTypekit();
   }
 

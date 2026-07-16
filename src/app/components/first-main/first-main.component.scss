@@ -16,14 +16,17 @@
 }
 
 .wedding-image-box {
-  width: 50%;
-  height: 500px;
+  width: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
 
   .wedding-image {
-    width: 350px;
-    height: 500px;
+    width: 70%;
+    max-width: 350px;
+    height: auto;         /* 원본 세로 비율 유지 */
+    aspect-ratio: 350 / 500;
+    object-fit: cover;
   }
 }
 

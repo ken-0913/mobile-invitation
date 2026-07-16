@@ -1,6 +1,6 @@
 .carousel-container {
   width: 100%;
-  height: 800px; /* 높이 증가 */
+  height: auto; /* 내용에 맞춰 자동 (고정 800px 제거) */
   background-color: black;
   padding: 20px; /* 좌우 여백 추가 */
   box-sizing: border-box; /* padding을 포함한 크기 계산 */
@@ -46,7 +46,8 @@
 
 .carousel-slide {
   min-width: 100%;
-  height: 600px; /* 이미지 높이 증가 */
+  height: 80vh;      /* 화면 높이에 비례 */
+  max-height: 600px; /* 큰 화면에서 과도하게 커지지 않도록 */
 }
 
 .carousel img {
