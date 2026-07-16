@@ -6,30 +6,38 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "serve:ssr:mobile-invitation-v1": "node dist/mobile-invitation-v1/server/server.mjs"
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^18.2.0",
-    "@angular/common": "^18.2.0",
-    "@angular/compiler": "^18.2.0",
-    "@angular/core": "^18.2.0",
-    "@angular/forms": "^18.2.0",
-    "@angular/material": "^18.2.13",
-    "@angular/platform-browser": "^18.2.0",
-    "@angular/platform-browser-dynamic": "^18.2.0",
-    "@angular/router": "^18.2.0",
+    "@angular/animations": "^22.0.7",
+    "@angular/common": "^22.0.7",
+    "@angular/compiler": "^22.0.7",
+    "@angular/core": "^22.0.7",
+    "@angular/forms": "^22.0.7",
+    "@angular/material": "^22.0.5",
+    "@angular/platform-browser": "^22.0.7",
+    "@angular/platform-browser-dynamic": "^22.0.7",
+    "@angular/platform-server": "^22.0.7",
+    "@angular/router": "^22.0.7",
+    "@angular/ssr": "^22.0.7",
+    "express": "^5.1.0",
+    "firebase": "^12.16.0",
     "ng-gallery": "^12.0.0",
     "rxjs": "~7.8.0",
     "schematics-scss-migrate": "^2.3.17",
     "tslib": "^2.3.0",
-    "zone.js": "~0.14.10"
+    "zone.js": "~0.15.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^18.2.12",
-    "@angular/cli": "^18.2.12",
-    "@angular/compiler-cli": "^18.2.0",
+    "@angular-devkit/build-angular": "^22.0.7",
+    "@angular/cli": "^22.0.7",
+    "@angular/compiler-cli": "^22.0.7",
+    "@types/express": "^5.0.1",
     "@types/jasmine": "~5.1.0",
+    "@types/node": "^20.17.19",
+    "istanbul-lib-instrument": "^6.0.3",
     "jasmine-core": "~5.2.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
@@ -37,6 +45,6 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "sass": "^1.81.0",
-    "typescript": "~5.5.2"
+    "typescript": "~6.0.3"
   }
 }
