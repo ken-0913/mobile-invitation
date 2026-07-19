@@ -36,6 +36,9 @@ spec:
             # Cloud Run 프록시 뒤이므로 X-Forwarded-Host 신뢰
             - name: NG_TRUST_PROXY_HEADERS
               value: "1"
+            # 비공개 admin-backend (SSR가 ID 토큰을 붙여 서비스 간 인증 호출)
+            - name: BACKEND_API_BASE_URL
+              value: "https://admin-backend-pfppe2wxla-du.a.run.app"
           resources:
             limits:
               cpu: "1"

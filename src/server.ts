@@ -5,6 +5,7 @@ import {
   writeResponseToNodeResponse,
 } from '@angular/ssr/node';
 import express from 'express';
+import { GoogleAuth, IdTokenClient } from 'google-auth-library';
 import { join } from 'node:path';
 
 const browserDistFolder = join(import.meta.dirname, '../browser');
@@ -13,6 +14,19 @@ const app = express();
 const angularApp = new AngularNodeAppEngine();
 const backendApiBaseUrl =
   process.env['BACKEND_API_BASE_URL'] ?? 'http://localhost:8080';
+
+// admin-backend 는 비공개 Cloud Run 서비스라 ID 토큰(서비스 간 인증)이 필요하다.
+// 런타임 SA 에 roles/run.invoker 가 있어야 한다. 로컬 백엔드(localhost)는 인증 생략.
+const backendNeedsAuth = new URL(backendApiBaseUrl).hostname !== 'localhost';
+let idTokenClient: IdTokenClient | undefined;
+
+async function backendAuthHeaders(): Promise<HeadersInit> {
+  if (!backendNeedsAuth) {
+    return {};
+  }
+  idTokenClient ??= await new GoogleAuth().getIdTokenClient(backendApiBaseUrl);
+  return idTokenClient.getRequestHeaders(backendApiBaseUrl);
+}
 
 app.get('/api/invitations/:shortId', async (req, res, next) => {
   try {
@@ -25,6 +39,7 @@ app.get('/api/invitations/:shortId', async (req, res, next) => {
 
     const backendResponse = await fetch(
       `${backendApiBaseUrl}/api/public/invitations/${encodeURIComponent(shortId)}`,
+      { headers: await backendAuthHeaders() },
     );
 
     if (backendResponse.status === 404) {

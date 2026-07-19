@@ -23,6 +23,7 @@
     "@angular/router": "^22.0.7",
     "@angular/ssr": "^22.0.7",
     "express": "^5.1.0",
+    "google-auth-library": "^10.9.0",
     "ng-gallery": "^12.0.0",
     "rxjs": "~7.8.0",
     "schematics-scss-migrate": "^2.3.17",
