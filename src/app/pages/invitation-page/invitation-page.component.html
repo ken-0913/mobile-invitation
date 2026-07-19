@@ -1,15 +1,23 @@
 <app-type-kit-loader></app-type-kit-loader>
 
-@if (invitation$ | async; as invitation) {
-  <div class="container">
-    <app-first-main [invitation]="invitation"></app-first-main>
-    <app-wedding-invite-comment [invitation]="invitation"></app-wedding-invite-comment>
-    <app-wedding-calander [invitation]="invitation"></app-wedding-calander>
-    <app-wedding-gallery-v2 [invitation]="invitation"></app-wedding-gallery-v2>
-    <app-wedding-location [invitation]="invitation"></app-wedding-location>
-    <app-wedding-account [invitation]="invitation"></app-wedding-account>
-    <app-kakao-share [invitation]="invitation"></app-kakao-share>
-  </div>
+@if (state$ | async; as state) {
+  @switch (state.status) {
+    @case ('found') {
+      <div class="container">
+        <app-first-main [invitation]="state.invitation"></app-first-main>
+        <app-wedding-invite-comment [invitation]="state.invitation"></app-wedding-invite-comment>
+        <app-wedding-calander [invitation]="state.invitation"></app-wedding-calander>
+        <app-wedding-gallery-v2 [invitation]="state.invitation"></app-wedding-gallery-v2>
+        <app-wedding-location [invitation]="state.invitation"></app-wedding-location>
+        <app-wedding-account [invitation]="state.invitation"></app-wedding-account>
+        <app-kakao-share [invitation]="state.invitation"></app-kakao-share>
+      </div>
 
-  <app-wedding-foorter></app-wedding-foorter>
+      <app-wedding-foorter></app-wedding-foorter>
+    }
+
+    @case ('notFound') {
+      <app-not-found-page></app-not-found-page>
+    }
+  }
 }

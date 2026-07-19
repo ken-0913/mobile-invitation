@@ -11,22 +11,38 @@ const browserDistFolder = join(import.meta.dirname, '../browser');
 
 const app = express();
 const angularApp = new AngularNodeAppEngine();
+const backendApiBaseUrl =
+  process.env['BACKEND_API_BASE_URL'] ?? 'http://localhost:8080';
 
-/**
- * Example Express Rest API endpoints can be defined here.
- * Uncomment and define endpoints as necessary.
- *
- * Example:
- * ```ts
- * app.get('/api/{*splat}', (req, res) => {
- *   // Handle API request
- * });
- * ```
- */
+app.get('/api/invitations/:shortId', async (req, res, next) => {
+  try {
+    const shortId = req.params['shortId'];
 
-/**
- * Serve static files from /browser
- */
+    if (!shortId) {
+      res.status(400).json({ error: 'shortId is required' });
+      return;
+    }
+
+    const backendResponse = await fetch(
+      `${backendApiBaseUrl}/api/public/invitations/${encodeURIComponent(shortId)}`,
+    );
+
+    if (backendResponse.status === 404) {
+      res.status(404).json({ error: 'Invitation not found' });
+      return;
+    }
+
+    if (!backendResponse.ok) {
+      res.status(backendResponse.status).json({ error: 'Backend request failed' });
+      return;
+    }
+
+    res.json(await backendResponse.json());
+  } catch (error) {
+    next(error);
+  }
+});
+
 app.use(
   express.static(browserDistFolder, {
     maxAge: '1y',
@@ -35,9 +51,6 @@ app.use(
   }),
 );
 
-/**
- * Handle all other requests by rendering the Angular application.
- */
 app.use((req, res, next) => {
   angularApp
     .handle(req)
@@ -47,10 +60,6 @@ app.use((req, res, next) => {
     .catch(next);
 });
 
-/**
- * Start the server if this module is the main entry point, or it is ran via PM2.
- * The server listens on the port defined by the `PORT` environment variable, or defaults to 4000.
- */
 if (isMainModule(import.meta.url) || process.env['pm_id']) {
   const port = process.env['PORT'] || 4000;
   app.listen(port, (error) => {
@@ -62,7 +71,4 @@ if (isMainModule(import.meta.url) || process.env['pm_id']) {
   });
 }
 
-/**
- * Request handler used by the Angular CLI (for dev-server and during build) or Firebase Cloud Functions.
- */
 export const reqHandler = createNodeRequestHandler(app);

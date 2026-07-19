@@ -40,3 +40,13 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Environment / secrets — 커밋 금지
+.env
+.env.*
+*.local
+# GCP 서비스 계정 키
+*service-account*.json
+*credentials*.json
+gcp-key*.json
+firebase-adminsdk*.json

@@ -26,6 +26,7 @@ COPY --from=build /app/dist ./dist
 
 # Cloud Run 은 PORT 환경변수를 주입한다 (server.ts 가 이를 사용).
 ENV PORT=8080
+ENV BACKEND_API_BASE_URL="http://localhost:18080"
 
 # SSRF 보호(Angular SSR). 배포 도메인으로 반드시 교체.
 #   예: NG_ALLOWED_HOSTS="mobile-invitation-xxxx.run.app,yourdomain.com"

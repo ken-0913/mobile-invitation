@@ -1,0 +1,42 @@
+:host {
+  display: block;
+  min-height: 100dvh;
+  background: #faf8f5;
+  color: #25211f;
+}
+
+.not-found {
+  display: grid;
+  min-height: 100dvh;
+  place-items: center;
+  padding: 32px 24px;
+}
+
+.not-found__content {
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+
+.not-found__code {
+  margin: 0 0 12px;
+  color: #a66b54;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.not-found__message {
+  margin: 14px 0 0;
+  color: #6f6660;
+  font-size: 15px;
+  line-height: 1.7;
+  word-break: keep-all;
+}

@@ -1,27 +1,37 @@
-# MobileInvitationV1
+# Mobile Invitation V1
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.12.
+모바일 청첩장 공개 페이지다.
 
-## Development server
+## Architecture
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+```text
+Browser / Angular SSR
+  -> mobild-invitation-v1 Express route (/api/invitations/:slug)
+  -> admin backend public API (/api/public/invitations/:slug)
+  -> Firebase Firestore
+```
 
-## Code scaffolding
+이 프로젝트는 Firebase에 직접 접근하지 않는다. 동일한 Firebase DB는 `../admin` 백엔드가 읽고, 공개 프론트는 백엔드 API만 호출한다.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Runtime Environment
 
-## Build
+```sh
+BACKEND_API_BASE_URL=http://192.168.0.134:18080
+PORT=8080
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+로컬 Docker 테스트 예시:
 
-## Running unit tests
+```sh
+docker build -t mobild-invitation-v1:backend-api .
+docker run --rm -p 15174:8080 \
+  -e BACKEND_API_BASE_URL=http://192.168.0.134:18080 \
+  -e NG_ALLOWED_HOSTS=192.168.0.134 \
+  mobild-invitation-v1:backend-api
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+샘플 URL:
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```text
+http://192.168.0.134:15174/i/sample-wedding-04
+```

@@ -1,69 +1,37 @@
-import { Injectable } from '@angular/core';
-import { Observable, from, of } from 'rxjs';
-import { initializeApp, getApps, FirebaseApp } from 'firebase/app';
-import { getFirestore, doc, getDoc, Firestore } from 'firebase/firestore/lite';
+import { HttpClient } from '@angular/common/http';
+import { Injectable, REQUEST, inject } from '@angular/core';
+import { Observable, catchError, map, of } from 'rxjs';
 
-import { environment } from '../../environments/environment';
 import { Invitation } from '../models/invitation.model';
-import { SAMPLE_INVITATION } from '../data/sample-invitation';
+import { toInvitation } from '../utils/invitation-mapper';
 
-/**
- * 청첩장 데이터 조회.
- *
- * 조회 패턴은 shortId 로 문서 하나를 읽는 단건 read 뿐이므로
- * 실시간 구독이 필요 없는 firebase/firestore/lite(REST 기반)를 사용한다.
- * SSR(Node)·브라우저 양쪽에서 동일하게 동작한다.
- *
- * environment.useSampleData=true 이면 Firestore 없이 샘플을 반환한다.
- */
+/** 청첩장 데이터 조회. 프론트는 Firebase에 직접 접근하지 않고 백엔드 API만 호출한다. */
 @Injectable({ providedIn: 'root' })
 export class InvitationService {
-  private db?: Firestore;
+  private http = inject(HttpClient);
+  private request = inject(REQUEST, { optional: true });
 
-  /** shortId 로 청첩장 1건 조회. 없으면 null */
+  /** shortId(slug 또는 문서 ID)로 청첩장 1건 조회. 없으면 null */
   getInvitation(shortId: string): Observable<Invitation | null> {
-    if (environment.useSampleData) {
-      return of(SAMPLE_INVITATION);
+    if (!shortId) {
+      return of(null);
     }
-    return from(this.fetchFromFirestore(shortId));
+
+    return this.http
+      .get<Invitation>(this.apiUrl(shortId))
+      .pipe(
+        map((invitation) => toInvitation(invitation)),
+        catchError(() => of(null)),
+      );
   }
 
-  private async fetchFromFirestore(shortId: string): Promise<Invitation | null> {
-    const snap = await getDoc(doc(this.firestore(), 'invitations', shortId));
-    if (!snap.exists()) {
-      return null;
+  private apiUrl(shortId: string): string {
+    const path = `/api/invitations/${encodeURIComponent(shortId)}`;
+
+    if (!this.request) {
+      return path;
     }
-    return this.toInvitation(snap.data());
-  }
 
-  private firestore(): Firestore {
-    if (!this.db) {
-      const app: FirebaseApp = getApps().length
-        ? getApps()[0]
-        : initializeApp(environment.firebase);
-      this.db = getFirestore(app);
-    }
-    return this.db;
+    return new URL(path, this.request.url).toString();
   }
-
-  /** Firestore raw 데이터를 도메인 모델로 변환 (Timestamp -> Date) */
-  private toInvitation(data: any): Invitation {
-    return {
-      ...data,
-      createdAt: toDate(data.createdAt),
-      updatedAt: toDate(data.updatedAt),
-      wedding: {
-        ...data.wedding,
-        dateTime: toDate(data.wedding?.dateTime) ?? new Date(),
-      },
-    } as Invitation;
-  }
-}
-
-/** Firestore Timestamp / ISO 문자열 / Date 어느 쪽이든 Date 로 변환 */
-function toDate(value: any): Date | undefined {
-  if (!value) return undefined;
-  if (value instanceof Date) return value;
-  if (typeof value.toDate === 'function') return value.toDate();
-  return new Date(value);
 }

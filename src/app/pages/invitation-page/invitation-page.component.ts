@@ -2,11 +2,12 @@ import { Component, ChangeDetectionStrategy, inject, OnInit } from '@angular/cor
 import { AsyncPipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
-import { Observable, map, tap } from 'rxjs';
+import { Observable, map, startWith, tap } from 'rxjs';
 
 import { InvitationService } from '../../services/invitation.service';
 import { Invitation } from '../../models/invitation.model';
 import { shortDateTime } from '../../utils/date-format';
+import { NotFoundPageComponent } from '../not-found-page/not-found-page.component';
 
 import { TypekitLoaderComponent } from '../../components/type-kit-loader/type-kit-loader.component';
 import { FirstMainComponent } from '../../components/first-main/first-main.component';
@@ -37,6 +38,7 @@ import { WeddingFoorterComponent } from '../../components/wedding-footer/wedding
     WeddingAccountComponent,
     KakaoShareComponent,
     WeddingFoorterComponent,
+    NotFoundPageComponent,
   ],
   templateUrl: './invitation-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -47,12 +49,18 @@ export class InvitationPageComponent implements OnInit {
   private title = inject(Title);
   private meta = inject(Meta);
 
-  invitation$!: Observable<Invitation | null>;
+  state$!: Observable<InvitationPageState>;
 
   ngOnInit(): void {
     const shortId = this.route.snapshot.paramMap.get('shortId') ?? '';
-    this.invitation$ = this.service.getInvitation(shortId).pipe(
+    const loadingState: InvitationPageState = { status: 'loading' };
+
+    this.state$ = this.service.getInvitation(shortId).pipe(
       tap((inv) => inv && this.applyMetaTags(inv)),
+      map((inv): InvitationPageState =>
+        inv ? { status: 'found', invitation: inv } : { status: 'notFound' },
+      ),
+      startWith(loadingState),
     );
   }
 
@@ -71,3 +79,8 @@ export class InvitationPageComponent implements OnInit {
     this.meta.updateTag({ name: 'description', content: description });
   }
 }
+
+type InvitationPageState =
+  | { status: 'loading' }
+  | { status: 'found'; invitation: Invitation }
+  | { status: 'notFound' };
