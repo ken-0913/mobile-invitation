@@ -6,12 +6,32 @@ import {
 } from '@angular/ssr/node';
 import express from 'express';
 import { GoogleAuth, IdTokenClient } from 'google-auth-library';
+import { timingSafeEqual } from 'node:crypto';
 import { join } from 'node:path';
 
 const browserDistFolder = join(import.meta.dirname, '../browser');
 
 const app = express();
 const angularApp = new AngularNodeAppEngine();
+
+// Cloudflare 전용 접속 강제: Worker가 붙이는 X-Origin-Verify 헤더를 검증한다.
+// run.app URL 직접 접속(Cloudflare 우회)은 이 시크릿을 모르므로 403.
+// 시크릿 미설정 시(로컬 개발) 검증을 건너뛴다.
+const originVerifySecret = process.env['ORIGIN_VERIFY_SECRET'];
+if (originVerifySecret) {
+  const expected = Buffer.from(originVerifySecret);
+  app.use((req, res, next) => {
+    const provided = Buffer.from(req.get('x-origin-verify') ?? '');
+    if (
+      provided.length === expected.length &&
+      timingSafeEqual(provided, expected)
+    ) {
+      next();
+      return;
+    }
+    res.status(403).json({ error: 'Forbidden' });
+  });
+}
 const backendApiBaseUrl =
   process.env['BACKEND_API_BASE_URL'] ?? 'http://localhost:8080';
 
