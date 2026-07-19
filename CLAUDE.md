@@ -96,6 +96,14 @@ npm test       # ng test — Karma + Jasmine 단위 테스트
   run.app URL 로 요청을 중계하고 원래 호스트를 `X-Forwarded-Host` 로 전달한다.
   배포: `cd cloudflare && npx wrangler deploy` (커스텀 도메인 DNS/인증서는 Cloudflare 가 자동 관리).
   새 도메인을 붙이면 `cloudrun/service.yaml` 의 `NG_ALLOWED_HOSTS` 에도 추가해야 한다.
+- **Cloudflare 전용 접속 강제(우회 차단)**: run.app URL 직접 접속은 Cloudflare 의 WAF/캐시를
+  건너뛰므로, 공유 시크릿 `X-Origin-Verify` 로 막는다. Worker(`cloudflare/src/index.ts`)가 헤더를
+  주입하고 Express(`server.ts`)가 검증해 불일치 시 403. 시크릿은 Secret Manager `origin-verify-secret`
+  에 보관하고 Worker(`wrangler secret`)·Cloud Run(`secretKeyRef`) 양쪽에 같은 값을 준다.
+  SSR 이 자기 자신의 `/api` 를 loopback 호출하므로, 서버 전용 HTTP 인터셉터
+  (`interceptors/origin-verify.interceptor.ts`)가 그 내부 호출에도 헤더를 실어야 한다(안 그러면 404).
+  주의: 이는 **앱 계층** 차단이라 컨테이너는 뜬다. 네트워크 계층까지 막으려면 외부 LB + Cloud Armor 로
+  Cloudflare IP 대역만 허용해야 한다.
 - **GCP Cloud Run** (컨테이너 기반). Angular **SSR** 앱을 컨테이너로 빌드해 배포한다.
   - `Dockerfile` (멀티스테이지 빌드→런타임, Node 24-slim). 이미 저장소에 있음.
   - SSR 서버는 `PORT` 환경변수 사용(Cloud Run 주입, 기본 8080). `src/server.ts` 참고.
