@@ -41,6 +41,9 @@ testem.log
 .DS_Store
 Thumbs.db
 
+# Cloudflare wrangler 로컬 상태
+.wrangler/
+
 # Environment / secrets — 커밋 금지
 .env
 .env.*

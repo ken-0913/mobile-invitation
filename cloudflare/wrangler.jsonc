@@ -1,0 +1,16 @@
+// Cloudflare Worker: invitation.ran-kun.com → Cloud Run(Angular SSR) 프록시.
+// Cloud Run은 Host 헤더로 라우팅하므로 CNAME만으로는 연결할 수 없고,
+// Worker가 run.app URL로 요청을 중계하며 원래 호스트를 X-Forwarded-Host로 넘긴다.
+// 배포: cd cloudflare && npx wrangler deploy
+{
+  "name": "invitation-proxy",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-07-01",
+  "routes": [
+    { "pattern": "invitation.ran-kun.com", "custom_domain": true }
+  ],
+  "vars": {
+    "ORIGIN_URL": "https://mobile-invitation-432429670565.asia-northeast3.run.app"
+  },
+  "observability": { "enabled": true }
+}

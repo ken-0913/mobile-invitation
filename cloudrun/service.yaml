@@ -30,9 +30,9 @@ spec:
               containerPort: 8080
           env:
             # Angular 22 SSR Host 헤더 검증(SSRF 방지). 미설정 시 400.
-            # Firebase Hosting(커스텀 도메인/CDN) 경유 + run.app 직접 접속 모두 허용.
+            # Cloudflare Worker 프록시(cloudflare/) 경유 + run.app 직접 접속 허용.
             - name: NG_ALLOWED_HOSTS
-              value: "invitation.aor.kr,mobile-invitation-prod.web.app,mobile-invitation-prod.firebaseapp.com,mobile-invitation-432429670565.asia-northeast3.run.app,mobile-invitation-pfppe2wxla-du.a.run.app"
+              value: "invitation.ran-kun.com,mobile-invitation-432429670565.asia-northeast3.run.app"
             # Cloud Run 프록시 뒤이므로 X-Forwarded-Host 신뢰
             - name: NG_TRUST_PROXY_HEADERS
               value: "1"

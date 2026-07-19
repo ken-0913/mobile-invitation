@@ -91,11 +91,11 @@ npm test       # ng test — Karma + Jasmine 단위 테스트
 
 ## 배포
 
-- **도메인/CDN**: **Firebase Hosting** (`invitation.aor.kr`, 기본 `mobile-invitation-prod.web.app`).
-  정적 파일은 두지 않고 모든 요청을 rewrite 로 Cloud Run 서비스 `mobile-invitation` 에 프록시한다
-  (`firebase.json` 참고). 커스텀 도메인은 CNAME `invitation.aor.kr → mobile-invitation-prod.web.app`.
-  새 도메인을 붙이면 `cloudrun/service.yaml` 의 `NG_ALLOWED_HOSTS` 에도 추가해야 한다
-  (Hosting 이 legacy 형식 `*-pfppe2wxla-du.a.run.app` Host 로 프록시하므로 그 항목도 필요).
+- **도메인/CDN**: **Cloudflare Worker 프록시** (`invitation.ran-kun.com`, `cloudflare/` 디렉토리).
+  Cloud Run 은 Host 헤더로 라우팅하므로 CNAME 만으로는 연결 불가 — Worker `invitation-proxy` 가
+  run.app URL 로 요청을 중계하고 원래 호스트를 `X-Forwarded-Host` 로 전달한다.
+  배포: `cd cloudflare && npx wrangler deploy` (커스텀 도메인 DNS/인증서는 Cloudflare 가 자동 관리).
+  새 도메인을 붙이면 `cloudrun/service.yaml` 의 `NG_ALLOWED_HOSTS` 에도 추가해야 한다.
 - **GCP Cloud Run** (컨테이너 기반). Angular **SSR** 앱을 컨테이너로 빌드해 배포한다.
   - `Dockerfile` (멀티스테이지 빌드→런타임, Node 24-slim). 이미 저장소에 있음.
   - SSR 서버는 `PORT` 환경변수 사용(Cloud Run 주입, 기본 8080). `src/server.ts` 참고.
