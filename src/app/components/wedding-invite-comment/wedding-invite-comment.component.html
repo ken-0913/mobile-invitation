@@ -6,26 +6,28 @@
     <br><br><br><br>
 
     <table class="invisible-table">
-      <tr>
-        <td>
-          <strong>{{ invitation.groom.father }}</strong>
-          &nbsp;<strong class="dot">·</strong>&nbsp;
-          <strong>{{ invitation.groom.mother }}</strong>
-        </td>
-        <td>의</td>
-        <td>{{ invitation.groom.order }}</td>
-        <td>{{ invitation.groom.name }}</td>
-      </tr>
-      <tr>
-        <td>
-          <strong>{{ invitation.bride.father }}</strong>
-          &nbsp;<strong class="dot">·</strong>&nbsp;
-          <strong>{{ invitation.bride.mother }}</strong>
-        </td>
-        <td>의</td>
-        <td>{{ invitation.bride.order }}</td>
-        <td>{{ invitation.bride.name }}</td>
-      </tr>
+      <tbody>
+        <tr>
+          <td>
+            <strong>{{ invitation.groom.father }}</strong>
+            &nbsp;<strong class="dot">·</strong>&nbsp;
+            <strong>{{ invitation.groom.mother }}</strong>
+          </td>
+          <td>의</td>
+          <td>{{ invitation.groom.order }}</td>
+          <td>{{ invitation.groom.name }}</td>
+        </tr>
+        <tr>
+          <td>
+            <strong>{{ invitation.bride.father }}</strong>
+            &nbsp;<strong class="dot">·</strong>&nbsp;
+            <strong>{{ invitation.bride.mother }}</strong>
+          </td>
+          <td>의</td>
+          <td>{{ invitation.bride.order }}</td>
+          <td>{{ invitation.bride.name }}</td>
+        </tr>
+      </tbody>
     </table>
     <br><br><br><br>
     <p>{{ dateLine }}</p>
