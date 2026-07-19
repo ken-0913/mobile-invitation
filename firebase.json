@@ -1,0 +1,15 @@
+{
+  "hosting": {
+    "site": "mobile-invitation-prod",
+    "public": "firebase/public",
+    "rewrites": [
+      {
+        "source": "**",
+        "run": {
+          "serviceId": "mobile-invitation",
+          "region": "asia-northeast3"
+        }
+      }
+    ]
+  }
+}
