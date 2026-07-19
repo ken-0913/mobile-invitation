@@ -30,12 +30,9 @@ spec:
               containerPort: 8080
           env:
             # Angular 22 SSR Host 헤더 검증(SSRF 방지). 미설정 시 400.
-            # 배포 도메인으로 교체할 것:
-            #   gcloud projects describe mobile-invitation-prod --format='value(projectNumber)'
-            #   → mobile-invitation-{PROJECT_NUMBER}.asia-northeast3.run.app
             # 커스텀 도메인 연결 시 콤마로 추가.
             - name: NG_ALLOWED_HOSTS
-              value: "mobile-invitation-PROJECT_NUMBER.asia-northeast3.run.app"
+              value: "mobile-invitation-432429670565.asia-northeast3.run.app"
             # Cloud Run 프록시 뒤이므로 X-Forwarded-Host 신뢰
             - name: NG_TRUST_PROXY_HEADERS
               value: "1"
