@@ -127,7 +127,11 @@ function toInvitationFromPublicApi(data: any): Invitation {
       groom: toPublicApiAccounts(data.bankAccounts?.groom),
       bride: toPublicApiAccounts(data.bankAccounts?.bride),
     },
-    transport: {},
+    transport: {
+      subway: data.transportSubway,
+      bus: data.transportBus,
+      parking: data.transportParking,
+    },
     share: {
       title: `${data.groomName ?? ''} ♥ ${data.brideName ?? ''} 결혼합니다`,
       description: `${formatDate(weddingDate)} ${data.venueName ?? ''}`.trim(),
