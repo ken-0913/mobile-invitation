@@ -1,45 +1,70 @@
 .map_container {
   text-align: center;
-  .transportation {
-    width: 400px;
-  }
+  height: 556px;
+  position: relative;
+  overflow: hidden;
 }
 
 
 .map {
-  margin: auto;
+  position: absolute;
+  top: 117px;
+  left: 0;
   width: 100%;
-  height: 400px;
+  height: 262px;
 }
+
 .grid-container {
+  position: absolute;
+  top: 427px;
+  left: 35px;
+  width: 323px;
+  height: 129px;
   display: grid;
-  grid-template-columns: 20% 70%; /* 첫 번째 열(셀 1, 셀 3)은 20%, 두 번째 열(셀 2, 셀 4)은 80% */
-  grid-template-rows: repeat(2, 1fr);    /* 2개의 행을 1:1 비율로 설정 */
-  gap: 10px; /* 그리드 항목 사이의 간격 */
-  font-size: 16px;
+  grid-template-columns: 45px 1fr;
+  grid-template-rows: repeat(3, auto);
+  column-gap: 10px;
+  row-gap: 18px;
+  font-size: 12px;
 }
+
 .grid-item {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  min-height: 16px;
 }
 
 .grid-item.content {
   justify-content: flex-start;
-  padding-left: 10px;
 }
+
 .grid-item, p {
   font-family: "aor_kr", Graphie,rixmmjse-pro;
 }
 
 .content {
-  text-align: left; /* 왼쪽 정렬 */
-  word-break: break-word; /* 긴 단어가 있을 경우 줄바꿈 */
-  line-height: 2; /* 행 간격을 넓게 설정 */
-  padding-left: 10px; /* 텍스트와 강한 항목 사이 여백 */
+  text-align: left;
+  word-break: keep-all;
+  line-height: 16px;
 }
 
 .location-title {
-  font-size: 1.25rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  margin: 0;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.location-date {
+  position: absolute;
+  top: 54px;
+  left: 0;
+  width: 100%;
+  margin: 0;
+  font-size: 12px;
+  line-height: 16px;
 }

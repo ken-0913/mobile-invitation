@@ -1,9 +1,7 @@
 <div class="wedding-invite-comment">
   <div class="wedding-invite-comment-box">
-    <p class="invite-title">YOU'RE INVITED</p>
-    <br>
-    <p style="white-space: pre-line">{{ invitation.content.greeting }}</p>
-    <br><br><br><br>
+    <p class="invite-title">YOU’RE INVITED</p>
+    <p class="invite-greeting">{{ invitation.content.greeting }}</p>
 
     <table class="invisible-table">
       <tbody>
@@ -29,12 +27,9 @@
         </tr>
       </tbody>
     </table>
-    <br><br><br><br>
-    <p>{{ dateLine }}</p>
-    <p>{{ hallText }}</p>
+    <div class="date-place">
+      <p>{{ dateLine }}</p>
+      <p>{{ hallText }}</p>
+    </div>
   </div>
 </div>
-
-<br>
-<br>
-<br>

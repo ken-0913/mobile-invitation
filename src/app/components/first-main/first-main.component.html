@@ -1,14 +1,14 @@
 <div class="wedding-main">
   <div class="wedding-main-box">
-    <br><br><br><br>
-    <p>{{ coverTitle }}</p>
-    <p>{{ namesEn }}</p>
+    <p class="cover-title">{{ coverTitle }}</p>
+    <p class="names">{{ namesEn }}</p>
     <div class="wedding-image-box">
       <img class="wedding-image" [src]="coverImage" alt="wedding cover">
     </div>
-    <p>{{ dateText }}</p>
-    <p>{{ timeText }}</p>
-    <p>{{ venueText }}</p>
-    <br><br><br><br>
+    <div class="wedding-meta">
+      <p>{{ dateText }}</p>
+      <p>{{ timeText }}</p>
+      <p>{{ venueText }}</p>
+    </div>
   </div>
 </div>

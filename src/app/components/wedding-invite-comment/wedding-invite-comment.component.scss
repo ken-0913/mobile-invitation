@@ -3,75 +3,85 @@
   text-align: center;
   width: 100%;
   background-color: white;
-  display: flex;
-  flex-direction: column; /* 세로 방향으로 정렬 */
-  align-items: center; /* 가로축 가운데 정렬 */
-  justify-content: center; /* 세로축 가운데 정렬 */
+  height: 557px;
+  position: relative;
+  overflow: hidden;
 
   .invite-title {
-    font-size: 25px;
+    position: absolute;
+    top: 68px;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    font-family: Graphie, "aor_kr", sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: normal;
+    color: #000;
   }
 }
 
 .invisible-table {
+  position: absolute;
+  top: 315px;
+  left: 0;
   border-collapse: collapse;
-  width: auto; /* 테이블 너비를 내용에 맞춤 */
-  margin: 0 auto; /* 테이블을 가로로 가운데 정렬 */
+  width: 100%;
+  margin: 0;
 }
 
 .invisible-table td {
   border: none;
-  padding: 5px;
-  text-align: center; /* 각 셀 안의 텍스트를 가운데 정렬 */
+  padding: 0 3px;
+  text-align: center;
 }
 
 .wedding-invite-comment-box {
-  width: 80%; /* 너비를 적절히 조정 */
-  margin-top: 100px; /* 필요하면 여백 추가 */
-  font-size: 18px;
-  color: #333;
-}
-
-.wedding-image-box {
-  width: 50%;
-  height: 500px;
-}
-
-
-.name-row {
-  display: flex;
-  justify-content: center;
-  text-align: center;
   width: 100%;
+  height: 100%;
+  position: relative;
+  font-size: 12px;
+  color: #000;
 }
 
-.name-row span {
-  display: inline-block;
-  min-width: 120px; /* 최소 너비를 설정하여 균형 맞춤 */
-  text-align: center;
-}
-
-.names {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px; /* 행 간격 조절 */
+.invite-greeting {
+  position: absolute;
+  top: 132px;
+  left: 70px;
+  width: 253px;
+  margin: 0;
+  white-space: pre-line;
+  font-family: rixmmjse-pro, "RixMMjSE_Pro", "aor_kr", serif;
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 24px;
+  color: #000;
 }
 
 p,td,tr {
-  font-family: "aor_kr", Graphie,rixmmjse-pro;
+  font-family: rixmmjse-pro, "RixMMjSE_Pro", "aor_kr", Graphie;
 }
 
 td,tr {
-  font-size: 1rem; /* 점 크기를 키우기 위해 폰트 크기 조정 */
-  line-height: normal; /* 줄간격을 기본값으로 유지 */
+  font-size: 12px;
+  line-height: 24px;
 }
 
 .dot {
-  font-size: 3rem; /* 점의 크기만 키움 */
-  line-height: 1; /* 줄 간격 변경 방지 */
-  vertical-align: middle; /* 점의 세로 위치를 중앙으로 조정 */
+  font-size: 12px;
+  line-height: 1;
+  vertical-align: middle;
 }
 
+.date-place {
+  position: absolute;
+  top: 428px;
+  left: 0;
+  width: 100%;
+  font-size: 12px;
+  line-height: 26px;
 
-
+  p {
+    margin: 0;
+  }
+}
