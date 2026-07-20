@@ -99,8 +99,8 @@ function toInvitationFromPublicApi(data: any): Invitation {
       venue: {
         name: data.venueName ?? '',
         address: data.venueAddress ?? '',
-        lat: 0,
-        lng: 0,
+        lat: toNumber(data.latitude),
+        lng: toNumber(data.longitude),
       },
     },
     groom: {
