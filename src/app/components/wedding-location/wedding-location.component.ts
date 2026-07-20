@@ -11,10 +11,11 @@ import {
 import { isPlatformBrowser } from '@angular/common';
 import { Invitation } from '../../models/invitation.model';
 import { koreanDateTimeFull } from '../../utils/date-format';
+import { environment } from '../../../environments/environment';
 
-const url =
-  '//dapi.kakao.com/v2/maps/sdk.js?appkey=9b0205af17263ee2eba7167d5cb76a8e&autoload=false';
-declare const kakao: any;
+// 신규 NCP 키는 ncpKeyId, 구 키는 ncpClientId 파라미터를 쓴다.
+const NAVER_MAPS_SRC = `https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=${environment.naverMapClientId}`;
+declare const naver: any;
 
 @Component({
   selector: 'app-wedding-location',
@@ -52,42 +53,55 @@ export class WeddingLocationComponent implements AfterViewInit {
     if (!isPlatformBrowser(this.platformId)) {
       return;
     }
-    this.loadKakaoMapScript()
+    this.loadNaverMapScript()
       .then(() => this.initMap())
-      .catch((error) => console.error('카카오 맵 스크립트 로드 실패:', error));
+      .catch((error) => console.error('네이버 지도 스크립트 로드 실패:', error));
   }
 
-  loadKakaoMapScript(): Promise<void> {
+  private loadNaverMapScript(): Promise<void> {
     return new Promise((resolve, reject) => {
-      if (document.querySelector(`script[src='${url}']`)) {
+      if (typeof naver !== 'undefined' && naver.maps) {
         resolve();
+        return;
+      }
+      // 이미 삽입돼 로드 중이면 그 스크립트의 로드 완료를 기다린다.
+      const existing = document.querySelector<HTMLScriptElement>(
+        'script[data-naver-maps]',
+      );
+      if (existing) {
+        existing.addEventListener('load', () => resolve());
+        existing.addEventListener('error', (error) => reject(error));
+        return;
       }
       const script = document.createElement('script');
-      script.src = url;
-      script.type = 'text/javascript';
-      script.onload = () => kakao.maps.load(resolve);
+      script.src = NAVER_MAPS_SRC;
+      script.async = true;
+      script.dataset['naverMaps'] = 'true';
+      script.onload = () => resolve();
       script.onerror = (error) => reject(error);
       document.head.appendChild(script);
     });
   }
 
-  initMap(): void {
-    if (typeof kakao === 'undefined' || !kakao.maps) {
-      console.error('카카오 맵 객체가 초기화되지 않았습니다.');
+  private initMap(): void {
+    if (typeof naver === 'undefined' || !naver.maps) {
+      console.error('네이버 지도 객체가 초기화되지 않았습니다.');
       return;
     }
     const { lat, lng } = this.invitation.wedding.venue;
-    const container = this.mapContainer.nativeElement;
-    const options = {
-      center: new kakao.maps.LatLng(lat, lng),
-      level: 3,
-    };
-    this.map = new kakao.maps.Map(container, options);
+    if (lat == null || lng == null) {
+      return;
+    }
+    const position = new naver.maps.LatLng(lat, lng);
+    this.map = new naver.maps.Map(this.mapContainer.nativeElement, {
+      center: position,
+      zoom: 16,
+    });
 
     // 예식장 위치 마커
-    new kakao.maps.Marker({
+    new naver.maps.Marker({
+      position,
       map: this.map,
-      position: new kakao.maps.LatLng(lat, lng),
     });
   }
 }
